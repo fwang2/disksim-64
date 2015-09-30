@@ -1590,8 +1590,7 @@ int getlogorgdevs(logorg *result, struct lp_list *l) {
   int devno, devtype;
   int slot = 0;
 
-  result->devs = malloc(l->values_len * sizeof(logorgdev));
-  bzero(result->devs, l->values_len * sizeof(logorgdev));
+  result->devs = calloc(1, l->values_len * sizeof(logorgdev));
 
   for(c = 0; c < l->values_len; c++) {
     if(!l->values[c]) continue;
@@ -1647,8 +1646,7 @@ struct logorg *disksim_logorg_loadparams(struct lp_block *b)
   //  double rmwpoint = 0.0;
 
 
-  result = malloc(sizeof(struct logorg));
-  bzero(result, sizeof(struct logorg));
+  result = calloc(1, sizeof(struct logorg));
 
   //#include "modules/disksim_logorg_param.c"
   lp_loadparams(result, b, &disksim_logorg_mod);

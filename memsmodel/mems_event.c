@@ -1493,6 +1493,7 @@ mems_sled_update(ioreq_event *curr)
 		  mems_request_complete(extent_ptr->request, latency);
 		  addtoextraq((event *)extent_ptr->request);
 		  free(extent_ptr);
+		  extent_ptr = NULL;
 		  mems_extent_frees++;
 		  // addtoextraq(extent_ptr);
 		}
@@ -1562,6 +1563,7 @@ mems_io_interrupt_complete(ioreq_event *curr)
       if (curr->mems_reqinfo)
 	{
 	  free(curr->mems_reqinfo);
+	  curr->mems_reqinfo = NULL;
 	  mems_reqinfo_frees++;
 	  //addtoextraq((event *)curr->mems_reqinfo);
 	}
@@ -1753,6 +1755,7 @@ mems_bus_update(ioreq_event *curr)
 	  mems_request_complete(bus_extent->request, 0.0);
 	  addtoextraq((event *)bus_extent->request);  // schlos
 	  free(bus_extent);
+	  bus_extent = NULL;
 	  mems_extent_frees++;
 	  // addtoextraq(bus_extent);
 	}
@@ -1812,6 +1815,7 @@ mems_bus_update(ioreq_event *curr)
 	  if (isread && (reqinfo->extents == NULL))
 	    {
 	      free(reqinfo);
+	      reqinfo = NULL;
 	      mems_reqinfo_frees++;
 	      // addtoextraq((event *)reqinfo);  // schlos - I fixed a leak here, i think
 	    }

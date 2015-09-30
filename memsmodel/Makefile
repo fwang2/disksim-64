@@ -29,12 +29,12 @@
 
 include .paths
 
-LDFLAGS = -lm -L.
+LDFLAGS = -lm -L. 
 
 DEBUG_OFLAGS = -g -DASSERTS # -DDEBUG=1
 PROF_OFLAGS = -g -DASSERTS -p
 GPROF_OFLAGS = -g -DASSERTS -pg
-CFLAGS = $(DEBUG_OFLAGS) $(DISKSIM_CFLAGS) -I../ -I$(DISKSIM_PREFIX)/src
+CFLAGS = $(DEBUG_OFLAGS) $(DISKSIM_CFLAGS) -I../ -I$(DISKSIM_PREFIX)/src 
 
 CC = gcc -Wall -Wno-unused -MD
 CP = cp -p

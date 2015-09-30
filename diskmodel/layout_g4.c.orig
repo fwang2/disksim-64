@@ -326,7 +326,6 @@ g4_r(struct dm_layout_g4 *l,
 
  out_err:
   free(acc);
-  acc = NULL;
   return 0;
 }
 
@@ -425,7 +424,6 @@ ltop(struct dm_disk_if *d,
       }
     }
     free(p);
-    p = NULL;
   }
 
   return DM_OK;
@@ -498,7 +496,6 @@ ptol(struct dm_disk_if *d,
     }
 
     free(path);
-    path = NULL;
   }
 
   return result;
@@ -521,7 +518,6 @@ g4_spt(struct dm_layout_g4 *l,
     ddbg_assert(n->type == TRACK);
     rv = n->n.t->spt;
     free(p);
-    p = NULL;
   }
   else {
     rv = -1;
@@ -653,7 +649,6 @@ g4_sector_width(struct dm_disk_if *d,
       ddbg_assert(n->type == TRACK);
       result = n->n.t->sw;
       free(p);
-      p = NULL;
     }
   }
 
@@ -705,7 +700,6 @@ g4_skew(struct dm_disk_if *d,
   }
 
   free(p);
-  p = NULL;
   return result;
 }
 

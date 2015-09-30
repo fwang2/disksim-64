@@ -1232,17 +1232,15 @@ struct mems *memsmodel_mems_loadparams(struct lp_block *b,
 
   bzero(&tmpsled, sizeof(tmpsled));
 
-  result = malloc(sizeof(mems_t));
+  result = calloc(1, sizeof(mems_t));
   if(!result) return 0;
-  bzero(result, sizeof(mems_t));
 
   ((struct device_header *)result)->device_type = DEVICETYPE_MEMS;
 
   /* Initialize disksim's memsinfo structures */
   if (disksim->memsinfo == NULL) {
-    disksim->memsinfo = malloc(sizeof(struct mems_info));
+    disksim->memsinfo = calloc(1, sizeof(struct mems_info));
     ASSERT(disksim->memsinfo != NULL);
-    bzero((char *)disksim->memsinfo, sizeof(struct mems_info));
 
 /*      disksim->memsinfo->devices = malloc(MAXDEVICES * sizeof(mems_t)); */
 /*      ASSERT(disksim->memsinfo->devices != NULL); */
@@ -1264,7 +1262,7 @@ struct mems *memsmodel_mems_loadparams(struct lp_block *b,
       realloc(disksim->memsinfo->devices, 
 	      newlen * sizeof(mems_t *));
 
-    bzero(disksim->memsinfo->devices + c, zerolen * sizeof(mems_t *));
+    bzero(&(disksim->memsinfo->devices[c]), zerolen * sizeof(mems_t *));
     disksim->memsinfo->devices_len = newlen;
   }
   
@@ -1298,8 +1296,7 @@ struct mems *memsmodel_mems_loadparams(struct lp_block *b,
 }
 
 mems_t *mems_copy(mems_t *src) {
-  mems_t *result = malloc(sizeof(mems_t));
-  bzero(result, sizeof(mems_t));
+  mems_t *result = calloc(1, sizeof(mems_t));
   memcpy(result, src, sizeof(mems_t));
   result->queue = ioqueue_copy(src->queue);
   memcpy(&result->sled, src->sled, src->num_sleds * sizeof(mems_sled_t));
